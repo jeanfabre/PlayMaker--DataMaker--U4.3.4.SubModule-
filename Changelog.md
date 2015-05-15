@@ -1,5 +1,10 @@
 #DataMaker Change log
 
+### 1.0.2  
+**New**  
+- Merged ArrayMaker Json Plugin into DataMaker ( to avoid having to maintain this inside ArrayMaker  
+
+
 ### 1.0.1
 **New**  
 - New actions _XmlProxyGetXmlAsString_ and _XmlProxyRefreshStringContent_ to better handle saving xml content as string  
