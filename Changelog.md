@@ -2,8 +2,12 @@
 
 ### 1.0.2  
 **New**  
-- Merged ArrayMaker Json Plugin into DataMaker ( to avoid having to maintain this inside ArrayMaker  
+- Merged ArrayMaker Json Plugin into DataMaker (to avoid having to maintain this inside ArrayMaker)  
+- Two Json library ( [newtonsoft for .net2.0](https://json.codeplex.com/) and a [custom version](http://techblog.procurios.nl/k/n618/news/view/14605/14863/how-do-i-write-my-own-parser-(for-json).html)), one for converting from json to xml and one for quick access. I went for this because both library have different usage and each have pros and cons
 
+**Improvement**  
+- ReOrganized Folders Structure ( to be compliant for submodules)  
+- Distribution is now via Ecosystem
 
 ### 1.0.1
 **New**  
