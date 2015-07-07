@@ -1,5 +1,10 @@
 #DataMaker Change log
 
+### 1.0.3  
+**Fix**  
+- Remove deprecated api call `VariableEditor.FsmVarPopup()` and replaced with custom popup from PlayMakerUtils library ( created for the purpose)
+
+
 ### 1.0.2  
 **New**  
 - Merged ArrayMaker Json Plugin into DataMaker (to avoid having to maintain this inside ArrayMaker)  
