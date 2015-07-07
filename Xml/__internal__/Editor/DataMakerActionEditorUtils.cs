@@ -7,6 +7,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using HutongGames.PlayMaker.Ecosystem.Utils;
 
 public class DataMakerActionEditorUtils {
 
@@ -79,8 +80,14 @@ public class DataMakerActionEditorUtils {
 					
 				GUILayout.BeginHorizontal();
 
-					target.xPathVariables[i] = VariableEditor.FsmVarPopup(new GUIContent("Variable _"+i+"_"),fsm,target.xPathVariables[i]);
-				
+				bool fsmVariableChangedFlag;
+				target.xPathVariables[i] = PlayMakerInspectorUtils.EditorGUILayout_FsmVarPopup("Variable _"+i+"_",fsm.Variables.GetAllNamedVariables(),target.xPathVariables[i],out fsmVariableChangedFlag);
+
+				// PlayMaker api is now not working on 1.8 and shoudl become private
+				//target.xPathVariables[i] = VariableEditor.FsmVarPopup(new GUIContent("Variable _"+i+"_"),fsm,target.xPathVariables[i]);
+
+				edited = edited || fsmVariableChangedFlag;
+
 				if (i+1==count)
 				{
 					if (FsmEditorGUILayout.DeleteButton())
