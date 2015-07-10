@@ -281,7 +281,10 @@ public class DataMakerActionEditorUtils {
 				GUILayout.EndHorizontal();
 				
 				target.properties[i] = VariableEditor.FsmStringField(new GUIContent("Property"),fsm,target.properties[i],null);
-				target.propertiesVariables[i] = VariableEditor.FsmVarPopup(new GUIContent("Value"),fsm,target.propertiesVariables[i]);
+
+				//target.propertiesVariables[i] = VariableEditor.FsmVarPopup(new GUIContent("Value"),fsm,target.propertiesVariables[i]);
+				bool fsmVariableChangedFlag =false;
+				target.propertiesVariables[i] = PlayMakerInspectorUtils.EditorGUILayout_FsmVarPopup("Value",fsm.Variables.GetAllNamedVariables(),target.propertiesVariables[i],out fsmVariableChangedFlag);
 
 			}	
 		}
