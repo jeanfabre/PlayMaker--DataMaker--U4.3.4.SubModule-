@@ -92,13 +92,22 @@ namespace HutongGames.PlayMaker.Actions
 			XmlAttributeCollection attCol = xmlSource.Value.Attributes;
 			foreach(XmlAttribute _att in attCol)
 			{
-				proxy.hashTable["@"+_att.Name] = PlayMakerUtils.ParseValueFromString(_att.InnerText,propertiesTypes.GetPropertyType("@"+_att.Name));
+				//Debug.Log("_att: @"+_att.Name+" innerText="+_att.InnerText);
+				if (!string.IsNullOrEmpty(_att.InnerText))
+				{
+
+					proxy.hashTable["@"+_att.Name] = PlayMakerUtils.ParseValueFromString(_att.InnerText,propertiesTypes.GetPropertyType("@"+_att.Name));
+				}
 			}
 			
 			// get the node properties
 			foreach(XmlNode _childNode in xmlSource.Value.ChildNodes)
 			{
-				proxy.hashTable[_childNode.Name] = PlayMakerUtils.ParseValueFromString(_childNode.InnerText,propertiesTypes.GetPropertyType(_childNode.Name));				
+				//Debug.Log("_childNode.Name: "+_childNode.Name+" innerText="+_childNode.InnerText);
+				if (!string.IsNullOrEmpty(_childNode.InnerText))
+				{
+					proxy.hashTable[_childNode.Name] = PlayMakerUtils.ParseValueFromString(_childNode.InnerText,propertiesTypes.GetPropertyType(_childNode.Name));	
+				}
 			}
 			
 			return true;
