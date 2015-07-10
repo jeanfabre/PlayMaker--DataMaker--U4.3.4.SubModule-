@@ -2,7 +2,8 @@
 
 ### 1.0.3  
 **Fix**  
-- Remove deprecated api call `VariableEditor.FsmVarPopup()` and replaced with custom popup from PlayMakerUtils library ( created for the purpose)
+- Remove deprecated api call `VariableEditor.FsmVarPopup()` and replaced with custom popup from PlayMakerUtils library ( created for the purpose)  
+- Improved safety for `HashTableGetXmlNodeProperties` when `property.innerText` is null or empty.
 
 
 ### 1.0.2  
