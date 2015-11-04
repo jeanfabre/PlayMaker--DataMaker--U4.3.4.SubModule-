@@ -1,6 +1,5 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
-//
-//
+// (c) Copyright HutongGames, LLC 2010-2015. All rights reserved.
+
 using UnityEngine;
 
 using System.Xml;
@@ -17,7 +16,7 @@ namespace HutongGames.PlayMaker.Actions
 		
 		public FsmString xmlReference;
 		
-		[CompoundArray("Node Attributes", "Attribute", "Value")]
+		[CompoundArray("Node Properties", "Properties", "Value")]
 		public FsmString[] attributes;
 		
 		public FsmString[] attributesValues;

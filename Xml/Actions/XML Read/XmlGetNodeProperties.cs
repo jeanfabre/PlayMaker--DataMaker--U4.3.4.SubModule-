@@ -26,6 +26,8 @@ namespace HutongGames.PlayMaker.Actions
 		
 		
 		[ActionSection("Feedback")]
+		[UIHint(UIHint.Variable)]
+		public FsmBool found;
 		public FsmEvent foundEvent;
 		public FsmEvent notFoundEvent;
 		public FsmEvent errorEvent;
@@ -35,7 +37,8 @@ namespace HutongGames.PlayMaker.Actions
 			xmlSource = null;
 
 			storeProperties = new FsmXmlPropertiesStorage();
-			
+
+			found = null;
 			foundEvent = null;
 			notFoundEvent = null;
 			errorEvent = null;
@@ -66,9 +69,10 @@ namespace HutongGames.PlayMaker.Actions
 			if (node != null) {
 				
 				storeProperties.StoreNodeProperties(this.Fsm,node);
-				
+				found.Value = true;
 				Fsm.Event (foundEvent);
 			} else {
+				found.Value = false;
 				Fsm.Event (notFoundEvent);
 			}
 			

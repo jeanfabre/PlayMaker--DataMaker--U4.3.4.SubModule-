@@ -1,5 +1,13 @@
 #DataMaker Change log
 
+### 1.0.4  
+**Fix**  
+- Fixed multiple Proxies per GameObject detection routine within custom Actions  
+
+**Improvement**
+- improve safety for `HashTableGetxmlNodeProperties` when property.innerText is null or empty
+
+
 ### 1.0.3  
 **Fix**  
 - Remove deprecated api call `VariableEditor.FsmVarPopup()` and replaced with custom popup from PlayMakerUtils library ( created for the purpose)  

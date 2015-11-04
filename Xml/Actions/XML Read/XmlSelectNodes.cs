@@ -39,6 +39,8 @@ namespace HutongGames.PlayMaker.Actions
 		public FsmInt nodeCount;
 		
 		[ActionSection("Feedback")]
+		[UIHint(UIHint.Variable)]
+		public FsmBool found;
 		public FsmEvent foundEvent;
 		public FsmEvent notFoundEvent;
 		public FsmEvent errorEvent;
@@ -51,7 +53,8 @@ namespace HutongGames.PlayMaker.Actions
 			nodeCount = null;
 			
 			xmlResult = null;
-			
+
+			found = null;
 			foundEvent = null;
 			notFoundEvent = null;
 			errorEvent = null;
@@ -97,6 +100,7 @@ namespace HutongGames.PlayMaker.Actions
 				
 				if (nodeList.Count==0)
 				{
+					found.Value = false;
 					Fsm.Event (notFoundEvent);
 					return;
 				}
@@ -106,9 +110,10 @@ namespace HutongGames.PlayMaker.Actions
 					xmlResult.Value = DataMakerXmlUtils.XmlNodeListToString(nodeList);
 				//	Debug.Log(xmlResult.Value);
 				}
-				
+				found.Value = true;
 				Fsm.Event (foundEvent);
 			} else {
+				found.Value = false;
 				Fsm.Event (notFoundEvent);
 			}
 			

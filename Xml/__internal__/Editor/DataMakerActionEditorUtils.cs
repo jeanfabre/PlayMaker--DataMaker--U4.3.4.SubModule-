@@ -169,7 +169,7 @@ public class DataMakerActionEditorUtils {
 			}
 		}else if (source.sourceSelection==2)
 		{
-			
+
 			source.sourceString = VariableEditor.FsmStringField(new GUIContent("Fsm String"),fsm,source.sourceString,null);
 			
 			if (!source.sourceString.UseVariable)
@@ -198,7 +198,8 @@ public class DataMakerActionEditorUtils {
 			
 			if (source.sourceProxyGameObject!=null)
 			{
-				DataMakerXmlProxy proxy = DataMakerCore.GetDataMakerProxyPointer(typeof(DataMakerXmlProxy), source.sourceProxyGameObject.Value, source.sourceProxyReference.Value, true) as DataMakerXmlProxy;
+
+				DataMakerXmlProxy proxy =  DataMakerCore.GetDataMakerProxyPointer(typeof(DataMakerXmlProxy), source.sourceProxyGameObject.Value, source.sourceProxyReference.Value, true) as DataMakerXmlProxy;
 				if (proxy!=null)
 				{
 					if (proxy.XmlTextAsset!=null)

@@ -38,7 +38,7 @@ public class DataMakerCore {
 					Debug.LogError ("Several "+type+" coexists on the same GameObject and no reference is given to find the expected "+type);
 			}
 				
-			foreach (DataMakerXmlNodeProxy iProxy in proxies) {
+			foreach (DataMakerProxyBase iProxy in proxies) {
 				if (iProxy.referenceName == nameReference) {
 					return iProxy;
 				}

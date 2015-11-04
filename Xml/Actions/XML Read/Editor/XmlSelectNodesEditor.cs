@@ -26,10 +26,9 @@ public class XmlSelectNodesEditor : CustomActionEditor
 		}
 	
 		edited = edited || DataMakerActionEditorUtils.EditFsmXmlSourceField(_target.Fsm,_target.xmlSource);
-				
+
 		edited = edited || DataMakerActionEditorUtils.EditFsmXpathQueryField(_target.Fsm,_target.xPath);
-		
-		
+
 		EditField("xmlResult");
 		EditField("storeReference");
 		
