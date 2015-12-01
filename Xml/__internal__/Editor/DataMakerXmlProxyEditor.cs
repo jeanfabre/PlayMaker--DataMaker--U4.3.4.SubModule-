@@ -135,7 +135,7 @@ public class DataMakerXmlProxyEditor : Editor {
 
 	void Refresh()
 	{
-	//	Debug.Log("refresh");
+		//Debug.Log("refresh");
 
 
 		DataMakerXmlProxy _target = target as DataMakerXmlProxy;
@@ -158,6 +158,8 @@ public class DataMakerXmlProxyEditor : Editor {
 				//Debug.Log("PARSING XML NODE");
 				valid = DataMakerXmlUtils.StringToXmlNode(_target.content) != null;
 			}
+
+			return ;
 		}
 
 		if (_target.XmlTextAsset!=null)

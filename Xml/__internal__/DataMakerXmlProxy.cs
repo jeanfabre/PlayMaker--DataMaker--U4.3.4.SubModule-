@@ -60,7 +60,8 @@ public class DataMakerXmlProxy : DataMakerProxyBase {
 	public void RefreshStringVersion()
 	{
 		//Debug.Log("RefreshStringVersion");
-		content = DataMakerXmlUtils.XmlNodeToString(xmlNode);
+		this.content = DataMakerXmlUtils.XmlNodeToString(xmlNode);
+		//Debug.Log(this.content);
 		isDirty = true;
 	}
 	

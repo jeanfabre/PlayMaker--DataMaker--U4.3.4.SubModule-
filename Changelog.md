@@ -1,5 +1,9 @@
 #DataMaker Change log
 
+### 1.0.5  
+**Fix**  
+- Fixed proxy component refreshing system  
+ 
 ### 1.0.4  
 **Fix**  
 - Fixed multiple Proxies per GameObject detection routine within custom Actions  
