@@ -3,6 +3,7 @@
 ### 1.0.5  
 **Fix**  
 - Fixed proxy component refreshing system  
+- Fixed `XmlInsertNode` insertAfter case  
  
 ### 1.0.4  
 **Fix**  

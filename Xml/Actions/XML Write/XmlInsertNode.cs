@@ -76,7 +76,7 @@ namespace HutongGames.PlayMaker.Actions
 			if (insert == InsertNodeType.AfterChild)
 			{
 				XmlNode refChild = DataMakerXmlUtils.XmlRetrieveNode(childNodeReference.Value);
-				parentNode.InsertBefore(_node,refChild);
+				parentNode.InsertAfter(_node,refChild);
 				
 			}else if (insert == InsertNodeType.BeforeChild)
 			{
