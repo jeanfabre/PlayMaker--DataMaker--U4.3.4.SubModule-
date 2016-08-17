@@ -7,6 +7,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using HutongGames.PlayMaker.Ecosystem.Utils;
 
 public class DataMakerActionEditorUtils {
@@ -170,6 +171,8 @@ public class DataMakerActionEditorUtils {
 		}else if (source.sourceSelection==2)
 		{
 
+			PlayMakerInspectorUtils.SetActionEditorVariableSelectionContext(source,source.GetType().GetField("sourceString"));
+
 			source.sourceString = VariableEditor.FsmStringField(new GUIContent("Fsm String"),fsm,source.sourceString,null);
 			
 			if (!source.sourceString.UseVariable)
@@ -192,8 +195,12 @@ public class DataMakerActionEditorUtils {
 				source.sourceProxyReference = new FsmString();
 			}
 			
-			
+			PlayMakerInspectorUtils.SetActionEditorVariableSelectionContext(source,source.GetType().GetField("sourceProxyGameObject"));
+
 			source.sourceProxyGameObject = VariableEditor.FsmGameObjectField(new GUIContent("GameObject"),fsm,source.sourceProxyGameObject);
+
+			PlayMakerInspectorUtils.SetActionEditorVariableSelectionContext(source,source.GetType().GetField("sourceProxyReference"));
+
 			source.sourceProxyReference = VariableEditor.FsmStringField(new GUIContent("Reference"),fsm,source.sourceProxyReference,null);
 			
 			if (source.sourceProxyGameObject!=null)
@@ -220,6 +227,9 @@ public class DataMakerActionEditorUtils {
 			{
 				source.inMemoryReference = new FsmString();
 			}
+
+			PlayMakerInspectorUtils.SetActionEditorVariableSelectionContext(source,source.GetType().GetField("inMemoryReference"));
+
 			source.inMemoryReference = VariableEditor.FsmStringField(new GUIContent("Memory Reference"),fsm,source.inMemoryReference,null);
 			
 			if (!string.IsNullOrEmpty(source.inMemoryReference.Value) )
