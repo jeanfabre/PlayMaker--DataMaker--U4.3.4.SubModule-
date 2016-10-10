@@ -1,5 +1,13 @@
 #DataMaker Change log
 
+###1.1
+**Update**  
+- Update PlayMakerUtils  
+- updated ArrayMaker  
+
+**Fix**  
+- Fixed PlayMaker 1.8+ support
+  
 ### 1.0.5  
 **Fix**  
 - Fixed proxy component refreshing system  

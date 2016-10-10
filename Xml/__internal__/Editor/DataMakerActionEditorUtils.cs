@@ -170,9 +170,9 @@ public class DataMakerActionEditorUtils {
 			}
 		}else if (source.sourceSelection==2)
 		{
-
-			PlayMakerInspectorUtils.SetActionEditorVariableSelectionContext(source,source.GetType().GetField("sourceString"));
-
+			#if PLAYMAKER_1_8_OR_NEWER
+				PlayMakerInspectorUtils.SetActionEditorVariableSelectionContext(source,source.GetType().GetField("sourceString"));
+			#endif
 			source.sourceString = VariableEditor.FsmStringField(new GUIContent("Fsm String"),fsm,source.sourceString,null);
 			
 			if (!source.sourceString.UseVariable)
@@ -194,12 +194,15 @@ public class DataMakerActionEditorUtils {
 				source.sourceProxyGameObject = new FsmGameObject();
 				source.sourceProxyReference = new FsmString();
 			}
-			
-			PlayMakerInspectorUtils.SetActionEditorVariableSelectionContext(source,source.GetType().GetField("sourceProxyGameObject"));
 
+			#if PLAYMAKER_1_8_OR_NEWER
+				PlayMakerInspectorUtils.SetActionEditorVariableSelectionContext(source,source.GetType().GetField("sourceProxyGameObject"));
+			#endif
 			source.sourceProxyGameObject = VariableEditor.FsmGameObjectField(new GUIContent("GameObject"),fsm,source.sourceProxyGameObject);
 
-			PlayMakerInspectorUtils.SetActionEditorVariableSelectionContext(source,source.GetType().GetField("sourceProxyReference"));
+			#if PLAYMAKER_1_8_OR_NEWER
+				PlayMakerInspectorUtils.SetActionEditorVariableSelectionContext(source,source.GetType().GetField("sourceProxyReference"));
+			#endif
 
 			source.sourceProxyReference = VariableEditor.FsmStringField(new GUIContent("Reference"),fsm,source.sourceProxyReference,null);
 			
@@ -228,8 +231,9 @@ public class DataMakerActionEditorUtils {
 				source.inMemoryReference = new FsmString();
 			}
 
-			PlayMakerInspectorUtils.SetActionEditorVariableSelectionContext(source,source.GetType().GetField("inMemoryReference"));
-
+			#if PLAYMAKER_1_8_OR_NEWER
+				PlayMakerInspectorUtils.SetActionEditorVariableSelectionContext(source,source.GetType().GetField("inMemoryReference"));
+			#endif
 			source.inMemoryReference = VariableEditor.FsmStringField(new GUIContent("Memory Reference"),fsm,source.inMemoryReference,null);
 			
 			if (!string.IsNullOrEmpty(source.inMemoryReference.Value) )
@@ -343,7 +347,14 @@ public class DataMakerActionEditorUtils {
 		if (target.properties !=null &&  target.propertiesTypes !=null)
 		{
 			count = target.properties.Length;
+
 			
+			#if PLAYMAKER_1_8_OR_NEWER
+
+			FieldInfo _fsmStringArray_FieldInfo = target.GetType().GetField("properties");
+
+			#endif
+
 		
 			for(int i=0;i<count;i++)
 			{
@@ -362,7 +373,12 @@ public class DataMakerActionEditorUtils {
 					}
 				
 				GUILayout.EndHorizontal();
-				
+
+				#if PLAYMAKER_1_8_OR_NEWER
+					
+					PlayMakerInspectorUtils.SetActionEditorArrayVariableSelectionContext(target,i,_fsmStringArray_FieldInfo);
+				#endif
+
 				target.properties[i] = VariableEditor.FsmStringField(new GUIContent("Property"),fsm,target.properties[i],null);
 				target.propertiesTypes[i] = (VariableType)EditorGUILayout.EnumPopup(new GUIContent("Type"),target.propertiesTypes[i]);
 			}	
