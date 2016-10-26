@@ -1,5 +1,13 @@
 #DataMaker Change log
 
+###1.2
+**New**  
+- Csv Parser for working with Csv string with and without headers, with xml converter.
+
+**Fix**  
+- Fixed `ConvertJsonStringToXmlNode` saving xml to string  
+- Fixed fsmVariable selection for references
+
 ###1.1
 **Update**  
 - Update PlayMakerUtils  

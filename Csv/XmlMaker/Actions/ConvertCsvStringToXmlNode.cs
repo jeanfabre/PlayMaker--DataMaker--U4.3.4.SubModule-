@@ -1,4 +1,4 @@
-﻿// (c) Copyright HutongGames, LLC 2010-2015. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2016. All rights reserved.
 
 using System;
 using System.Collections;
@@ -6,25 +6,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using System.Xml;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+
+using HutongGames.PlayMaker.Ecosystem.DataMaker.CSV;
+
 
 namespace HutongGames.PlayMaker.Actions
 {
-	[ActionCategory("DataMaker Json")]
-	[Tooltip("Convert an json string into a Xml node")]
-	public class ConvertJsonStringToXmlNode : DataMakerXmlNodeActions
+	[ActionCategory("DataMaker Csv")]
+	[Tooltip("Convert an csv string into a Xml node")]
+	public class ConvertCsvStringToXmlNode : DataMakerXmlNodeActions
 	{
 		
-		[Tooltip("The json string")]
-		public FsmString jsonSource;
+		[Tooltip("The Csv string")]
+		[RequiredField]
+		public FsmString csvSource;
 
-		[Tooltip("The optional root element Name. Leave to none for no effect on the json source hierearchy. WARNING, json can have multiple root, and so as a safety measure, it should be set if you are unsure of the incoming content hierarchy")]//. If json has multiple root, this action will automatically inject a 'root' or use this root element name property")]
-		public FsmString rootElementName;
-
-		//[Tooltip("If true, rootElementName property will be forced as the xml root, and will use 'root' node name is rootElementName property is none or empty.")]
-		//public FsmBool forceRootElementName;
-
+		[Tooltip("If the csv first line is a headerm check this, it will allow you to use keys to access columns instead of indexes")]
+		public FsmBool hasHeader;
 
 		[ActionSection("Result")]
 		
@@ -43,11 +41,13 @@ namespace HutongGames.PlayMaker.Actions
 		
 		public FsmEvent errorEvent;
 
+
+		string[] _csvHeader;
+
 		public override void Reset ()
 		{
-			jsonSource = null;
-			rootElementName =  "root";
-			//forceRootElementName = true;
+			csvSource = null;
+			hasHeader = null;
 
 			storeReference = new FsmString(){UseVariable=true};
 			gameObject = null;
@@ -59,44 +59,40 @@ namespace HutongGames.PlayMaker.Actions
 		
 		public override void OnEnter ()
 		{
-			ConvertFromJsonString();
+			ConvertFromCsvString();
 			
 			Finish();
 		}
 		
-		void ConvertFromJsonString()
+		void ConvertFromCsvString()
 		{
-			string _jsonSource = jsonSource.Value;
 
-			/* fail to check if json root is a list of a single object... odd
-			// check if json has unique root or not.
-			try{
-
-				System.Object _json = (System.Object)JsonConvert.DeserializeObject(_jsonSource, typeof(System.Object));
-			}catch(Exception e)
-			{
-				Debug.LogError(e.Message);
-				Fsm.EventData.StringData = e.Message;
-				Fsm.Event(errorEvent);
-				return;
-			}
-
-			bool jsonHasRoot = _jsonSource.Length==1;
-
-			string ForcedRootName = string.IsNullOrEmpty(rootElementName.Value)?"root":rootElementName.Value;
-
-	*/
-
+			CsvData _data = CsvReader.LoadFromString(csvSource.Value,hasHeader.Value);
+		
 			XmlDocument _document = new XmlDocument();
-			try{
-				//if(!jsonHasRoot || !string.IsNullOrEmpty(rootElementName.Value) || forceRootElementName.Value)
+			XmlNode _root =	_document.AppendChild(_document.CreateElement("Root"));
 
-				if(!string.IsNullOrEmpty(rootElementName.Value) )
+			try{
+
+				if (_data.HasHeader)
 				{
-					_document = JsonConvert.DeserializeXmlNode(_jsonSource,rootElementName.Value);
-				}else{
-					_document = JsonConvert.DeserializeXmlNode(_jsonSource);
+					_csvHeader =_data.HeaderKeys.ToArray();
 				}
+
+				foreach(List<string> _row in _data.Data)
+				{
+					XmlNode _xmlRowNode = _document.CreateElement("Record");
+
+					for(int i=0;i<_row.Count;i++)
+					{
+						XmlNode _Item = _document.CreateElement(_data.HasHeader?_csvHeader[i]:"Field");
+						_Item.InnerText = _row[i];
+						_xmlRowNode.AppendChild(_Item);
+					}
+
+					_root.AppendChild(_xmlRowNode);
+				}
+
 			}catch(Exception e)
 			{
 				Debug.LogError(e.Message);
@@ -141,9 +137,9 @@ namespace HutongGames.PlayMaker.Actions
 
 			proxy.RefreshStringVersion();
 
-			if (!xmlString.IsNone) {
-				
-				xmlString.Value= proxy.content;
+			if (!xmlString.IsNone) 
+			{
+				xmlString.Value=proxy.content; 
 			}
 
 			Finish ();
