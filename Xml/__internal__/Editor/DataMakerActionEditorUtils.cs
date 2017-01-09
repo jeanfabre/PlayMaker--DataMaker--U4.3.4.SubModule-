@@ -250,10 +250,14 @@ public class DataMakerActionEditorUtils {
 			{
 				GUILayout.Label("-- empty --");
 			}else{
+				source._scroll = DataMakerEditorGUILayoutUtils.StringContentPreview(source._scroll,preview);
+
+				/*
 				source._scroll = GUILayout.BeginScrollView(source._scroll,"box", GUILayout.Height (200));
 				GUI.skin.box.alignment = TextAnchor.UpperLeft;
 				GUILayout.Box(preview,"Label",null);
 				GUILayout.EndScrollView();
+				*/
 			}
 		}
 		
@@ -294,10 +298,14 @@ public class DataMakerActionEditorUtils {
 					}
 				
 				GUILayout.EndHorizontal();
-				
+
+				#if PLAYMAKER_1_8_OR_NEWER
+//				PlayMakerInspectorUtils.SetActionEditorArrayVariableSelectionContext(target,i,target.GetType().GetField("properties").GetType());
+				#endif
+
 				target.properties[i] = VariableEditor.FsmStringField(new GUIContent("Property"),fsm,target.properties[i],null);
 
-				//target.propertiesVariables[i] = VariableEditor.FsmVarPopup(new GUIContent("Value"),fsm,target.propertiesVariables[i]);
+			//	target.propertiesVariables[i] = VariableEditor.FsmVarPopup(new GUIContent("Value"),fsm,target.propertiesVariables[i]);
 				bool fsmVariableChangedFlag =false;
 				target.propertiesVariables[i] = PlayMakerInspectorUtils.EditorGUILayout_FsmVarPopup("Value",fsm.Variables.GetAllNamedVariables(),target.propertiesVariables[i],out fsmVariableChangedFlag);
 
@@ -376,7 +384,7 @@ public class DataMakerActionEditorUtils {
 
 				#if PLAYMAKER_1_8_OR_NEWER
 					
-					PlayMakerInspectorUtils.SetActionEditorArrayVariableSelectionContext(target,i,_fsmStringArray_FieldInfo);
+					//PlayMakerInspectorUtils.SetActionEditorArrayVariableSelectionContext(target,i,_fsmStringArray_FieldInfo);
 				#endif
 
 				target.properties[i] = VariableEditor.FsmStringField(new GUIContent("Property"),fsm,target.properties[i],null);

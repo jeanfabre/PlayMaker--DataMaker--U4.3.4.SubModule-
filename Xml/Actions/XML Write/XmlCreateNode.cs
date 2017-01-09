@@ -54,6 +54,7 @@ namespace HutongGames.PlayMaker.Actions
 
 		public override void OnEnter ()
 		{
+			CreateNode();
 
 			Finish ();
 		}

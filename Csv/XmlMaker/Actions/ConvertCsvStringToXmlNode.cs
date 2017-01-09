@@ -115,7 +115,7 @@ namespace HutongGames.PlayMaker.Actions
 			{
 				if (_document.DocumentElement.GetType() == typeof(XmlNodeList) )
 				{
-					//DataMakerXmlUtils.XmlStoreNodeList(_document.DocumentElement as XmlNodeList,storeReference.Value);
+//					DataMakerXmlUtils.XmlStoreNodeList(_document.DocumentElement as XmlNodeList,storeReference.Value);
 				}else{
 					DataMakerXmlUtils.XmlStoreNode(_document.DocumentElement as XmlNode ,storeReference.Value);
 				}

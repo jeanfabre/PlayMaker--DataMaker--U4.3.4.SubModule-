@@ -30,9 +30,21 @@ public class DataMakerEditorGUILayoutUtils {
 	
 	public static Vector2 StringContentPreview(Vector2 scroll, string content)
 	{
+		string _preview = "";
+		if(content.Length > 10000)
+		{
+			_preview = content.Substring(0,9000);
+			_preview = _preview + "/n <etc...>";
+		}
+		else
+		{
+			_preview = content;
+		}
+
+
 		scroll = GUILayout.BeginScrollView(scroll,"box", GUILayout.Height (200));
 		GUI.skin.box.alignment = TextAnchor.UpperLeft;
-		GUILayout.Box(content,"label",null);
+		GUILayout.Box(_preview,"label",null);
 		GUILayout.EndScrollView();
 		
 		return scroll;

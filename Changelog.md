@@ -1,5 +1,16 @@
 #DataMaker Change log
 
+###1.2.2
+
+**Fix**  
+- Fixed `XmlCreateNode`  
+
+###1.2.1
+
+**Fix**  
+- Fixed xml string preview to prevent too long text that causes ui glitches and Unity editor complaints  
+
+ 
 ###1.2
 **New**  
 - Csv Parser for working with Csv string with and without headers, with xml converter.

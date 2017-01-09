@@ -3,6 +3,7 @@
 using UnityEngine;
 using System.Collections;
 
+
 public class DataMakerProxyBase : MonoBehaviour {
 
 	/// <summary>
