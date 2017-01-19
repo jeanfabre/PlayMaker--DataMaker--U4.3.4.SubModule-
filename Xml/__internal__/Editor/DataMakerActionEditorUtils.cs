@@ -358,8 +358,8 @@ public class DataMakerActionEditorUtils {
 
 			
 			#if PLAYMAKER_1_8_OR_NEWER
-
-			FieldInfo _fsmStringArray_FieldInfo = target.GetType().GetField("properties");
+			// TODO: TOFIX: pointing to a fsm variable to define a property is not working.
+			//FieldInfo _fsmStringArray_FieldInfo = target.GetType().GetField("properties");
 
 			#endif
 
@@ -384,7 +384,7 @@ public class DataMakerActionEditorUtils {
 
 				#if PLAYMAKER_1_8_OR_NEWER
 					
-					//PlayMakerInspectorUtils.SetActionEditorArrayVariableSelectionContext(target,i,_fsmStringArray_FieldInfo);
+				//	PlayMakerInspectorUtils.SetActionEditorArrayVariableSelectionContext(target,i,_fsmStringArray_FieldInfo);
 				#endif
 
 				target.properties[i] = VariableEditor.FsmStringField(new GUIContent("Property"),fsm,target.properties[i],null);

@@ -2,6 +2,14 @@
 
 ###1.2.2
 
+**New**  
+- new `XmlSelectNode` with working Property storage system, don't use `XmlSelectSingleNode` until it's fixed
+
+**Fix** 
+. Fixed `XmlSelectSingleNode` missing "found" property
+
+###1.2.2
+
 **Fix**  
 - Fixed `XmlCreateNode`  
 

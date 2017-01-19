@@ -9,10 +9,17 @@ using System.Xml.XPath;
 
 namespace HutongGames.PlayMaker.Actions
 {
-	
+	public class FsmXmlPropertyStorage : FsmStateAction {
+		
+		public FsmString property;
+		[UIHint(UIHint.Variable)]
+		public FsmVar variable;
+	}
+
+
 	[ActionCategory("DataMaker Xml")]
 	[Tooltip("Gets a node attributes and cdata from a xml text asset and an xpath query. Properties are referenced from the node itself, so a '.' is prepended if you use xpath within the property string like ")]
-	public class XmlSelectSingleNode : DataMakerXmlActions
+	public class XmlSelectNode : DataMakerXmlActions
 	{
 		
 		[ActionSection("Xml Source")]
@@ -30,10 +37,10 @@ namespace HutongGames.PlayMaker.Actions
 		
 		[Tooltip("The result of the xPathQuery stored in memory. More efficient if you want to process the result further")]
 		public FsmString storeReference;
-		
-		[ActionSection("properties storage")]
-		public FsmXmlPropertiesStorage storeProperties;
-		
+
+		[ActionSection("Properties Storage")]
+		public FsmXmlPropertyStorage[] properties;
+
 		
 		[ActionSection("Feedback")]
 		[UIHint(UIHint.Variable)]
@@ -52,8 +59,7 @@ namespace HutongGames.PlayMaker.Actions
 			xmlResult = null;
 			storeReference = null;
 			
-			storeProperties = new FsmXmlPropertiesStorage();
-			storeProperties.Fsm = this.Fsm;
+			properties = null;
 
 			found = null;
 			foundEvent = null;
@@ -101,7 +107,19 @@ namespace HutongGames.PlayMaker.Actions
 					xmlResult.Value = DataMakerXmlUtils.XmlNodeToString(node);
 				}
 				
-				storeProperties.StoreNodeProperties(this.Fsm,node);
+				int prop_i = 0;
+				foreach (FsmXmlPropertyStorage prop in properties) {
+
+					string _property = DataMakerXmlActions.GetNodeProperty(node,prop.property.Value);
+
+					PlayMakerUtils.ApplyValueToFsmVar(
+						this.Fsm,
+						prop.variable,
+						PlayMakerUtils.ParseValueFromString(_property,prop.variable.Type)
+						);
+
+					prop_i++;
+				}
 
 				found.Value = true;
 				Fsm.Event (foundEvent);

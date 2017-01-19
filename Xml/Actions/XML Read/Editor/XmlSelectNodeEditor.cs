@@ -6,14 +6,14 @@ using UnityEditor;
 using UnityEngine;
 using System;
 
-[CustomActionEditor(typeof(XmlSelectSingleNode))]
-public class XmlSelectSingleNodeEditor : XmlCustomActionEditor
+[CustomActionEditor(typeof(XmlSelectNode))]
+public class XmlSelectNodeEditor : XmlCustomActionEditor
 {
 
     public override bool OnGUI()
     {
 		bool edited = false;
-		XmlSelectSingleNode _target = (XmlSelectSingleNode)target;
+		XmlSelectNode _target = (XmlSelectNode)target;
 	
 		if (_target.xmlSource==null)
 		{
@@ -31,8 +31,8 @@ public class XmlSelectSingleNodeEditor : XmlCustomActionEditor
 		
 		EditField("xmlResult");
 		EditField("storeReference");
-		
-		edited = edited || DataMakerActionEditorUtils.EditFsmPropertiesStorage(_target.Fsm,_target.storeProperties);
+
+		EditField("properties");
 
 		EditField("found");
 		EditField("foundEvent");
