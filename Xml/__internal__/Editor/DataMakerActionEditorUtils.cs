@@ -143,16 +143,19 @@ public class DataMakerActionEditorUtils {
 		{
 			source.sourceString = new FsmString();
 		}
-		
-		source.sourceString.UseVariable = source.sourceSelection==2;
-		
+
+		//force use variable if necessary
+		if (!source.sourceString.UseVariable && source.sourceSelection==2)
+		{
+			source.sourceString.UseVariable = true;
+		}
+
 		bool showPreview = false;
 		string preview = "";
 		
 		if (source.sourceSelection==0)
 		{
-			
-			
+
 			source._sourceEdit = EditorGUILayout.Foldout(source._sourceEdit,new GUIContent("Edit"));
 			if (source._sourceEdit)
 			{
@@ -170,23 +173,27 @@ public class DataMakerActionEditorUtils {
 			}
 		}else if (source.sourceSelection==2)
 		{
+		
 			#if PLAYMAKER_1_8_OR_NEWER
 				PlayMakerInspectorUtils.SetActionEditorVariableSelectionContext(source,source.GetType().GetField("sourceString"));
 			#endif
+
 			source.sourceString = VariableEditor.FsmStringField(new GUIContent("Fsm String"),fsm,source.sourceString,null);
-			
+		
 			if (!source.sourceString.UseVariable)
 			{
 				source.sourceSelection=0;
 				return true;
 			}
-			
+
 			if (!source.sourceString.IsNone)
 			{
 				source._sourcePreview = EditorGUILayout.Foldout(source._sourcePreview,new GUIContent("Preview"));
 				showPreview = source._sourcePreview;
 				preview = source.sourceString.Value;
 			}
+
+
 		}else if (source.sourceSelection==3)
 		{
 			if (source.sourceProxyGameObject ==null)
@@ -243,7 +250,8 @@ public class DataMakerActionEditorUtils {
 				preview = DataMakerXmlUtils.XmlNodeToString(DataMakerXmlUtils.XmlRetrieveNode(source.inMemoryReference.Value));
 			}
 		}
-		
+
+
 		if (showPreview)
 		{
 			if (string.IsNullOrEmpty(preview))
@@ -303,8 +311,14 @@ public class DataMakerActionEditorUtils {
 //				PlayMakerInspectorUtils.SetActionEditorArrayVariableSelectionContext(target,i,target.GetType().GetField("properties").GetType());
 				#endif
 
-				target.properties[i] = VariableEditor.FsmStringField(new GUIContent("Property"),fsm,target.properties[i],null);
+			
 
+				target.properties[i] = VariableEditor.FsmStringField(new GUIContent("Property"),fsm,target.properties[i],null);
+				if (target.properties[i].UseVariable)
+				{
+					DataMakerEditorGUILayoutUtils.feedbackLabel("Using variables not supported, Check changeLog for infos",DataMakerEditorGUILayoutUtils.labelFeedbacks.ERROR);
+
+				}
 			//	target.propertiesVariables[i] = VariableEditor.FsmVarPopup(new GUIContent("Value"),fsm,target.propertiesVariables[i]);
 				bool fsmVariableChangedFlag =false;
 				target.propertiesVariables[i] = PlayMakerInspectorUtils.EditorGUILayout_FsmVarPopup("Value",fsm.Variables.GetAllNamedVariables(),target.propertiesVariables[i],out fsmVariableChangedFlag);

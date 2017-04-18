@@ -9,6 +9,8 @@ using System;
 [CustomActionEditor(typeof(XmlGetNodeProperties))]
 public class XmlGetNodePropertiesEditor : CustomActionEditor
 {
+	int _propCount = -1; // bug where action doesn't set dirty flag when length of array is edited without further edition on other properties
+
 
     public override bool OnGUI()
     {
@@ -21,8 +23,25 @@ public class XmlGetNodePropertiesEditor : CustomActionEditor
 		}
 	
 		edited = DataMakerActionEditorUtils.EditFsmXmlSourceField(_target.Fsm,_target.xmlSource);
-		
-		edited = edited || DataMakerActionEditorUtils.EditFsmPropertiesStorage(_target.Fsm,_target.storeProperties);
+
+
+		if ( _target.storeProperties.properties.Length==0)
+		{
+			if (_target.storeNodeProperties!=null)
+			{
+				_propCount = _target.storeNodeProperties.Length;
+			}
+			
+			EditField("storeNodeProperties");
+			
+			if (_target.storeNodeProperties!=null && _propCount != _target.storeNodeProperties.Length)
+			{
+				edited = true;
+			}
+		}else{
+			edited = edited || DataMakerActionEditorUtils.EditFsmPropertiesStorage(_target.Fsm,_target.storeProperties);
+		}
+
 
 		EditField("foundEvent");
 		EditField("notFoundEvent");

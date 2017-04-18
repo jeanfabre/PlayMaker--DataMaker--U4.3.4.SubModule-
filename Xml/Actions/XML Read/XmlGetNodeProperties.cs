@@ -21,8 +21,11 @@ namespace HutongGames.PlayMaker.Actions
 		public FsmXmlSource xmlSource;
 		
 		[ActionSection("Result")]
-		
-		public FsmXmlPropertiesStorage storeProperties;
+		public FsmXmlPropertiesStorage storeProperties; // legacy, and only used in old projects
+
+		[ActionSection("Result")]
+		public FsmXmlProperty[] storeNodeProperties; // new version, automatically used on new projects and switched to if storeProperties is found to have no entries. transition is automatic
+
 		
 		
 		[ActionSection("Feedback")]
@@ -37,6 +40,7 @@ namespace HutongGames.PlayMaker.Actions
 			xmlSource = null;
 
 			storeProperties = new FsmXmlPropertiesStorage();
+			storeNodeProperties = null;
 
 			found = null;
 			foundEvent = null;
@@ -67,8 +71,14 @@ namespace HutongGames.PlayMaker.Actions
 			}
 			
 			if (node != null) {
-				
-				storeProperties.StoreNodeProperties(this.Fsm,node);
+
+				if (storeNodeProperties.Length>0)
+				{
+					FsmXmlProperty.StoreNodeProperties(this.Fsm,node,storeNodeProperties);
+				}else{
+					storeProperties.StoreNodeProperties(this.Fsm,node);
+				}
+
 				found.Value = true;
 				Fsm.Event (foundEvent);
 			} else {

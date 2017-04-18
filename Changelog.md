@@ -2,8 +2,8 @@
 
 ###1.2.2
 
-**New**  
-- new `XmlSelectNode` with working Property storage system, don't use `XmlSelectSingleNode` until it's fixed
+**Fix**  
+- fixed `XmlSelectSingleNode`, `XmlSetNodeProperties` and `XmlGetNextNodeListProperties`, it will swap to a working list where fsm variables can be picked for property names
 
 **Fix** 
 . Fixed `XmlSelectSingleNode` missing "found" property
