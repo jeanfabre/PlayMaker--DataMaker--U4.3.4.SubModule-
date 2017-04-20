@@ -27,7 +27,6 @@ namespace HutongGames.PlayMaker.Actions
 		public FsmXmlProperty[] storeNodeProperties; // new version, automatically used on new projects and switched to if storeProperties is found to have no entries. transition is automatic
 
 		
-		
 		[ActionSection("Feedback")]
 		[UIHint(UIHint.Variable)]
 		public FsmBool found;
