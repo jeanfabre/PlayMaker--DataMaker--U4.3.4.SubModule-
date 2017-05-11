@@ -1,6 +1,21 @@
 #DataMaker Change log
 
-###1.2.2
+###1.2.4
+
+**Released** 11/05/2017
+
+**Fix**  
+- fixed xpathquery variable assignment interface for all actions using xpath query
+
+###1.2.4
+
+**Released** 26/04/2017
+
+**Fix**  
+- fixed `XmlSelectSingleNode`, `XmlSetNodeProperties` and `XmlGetNextNodeListProperties` preview in action browser
+
+
+###1.2.3
 
 **Fix**  
 - fixed `XmlSelectSingleNode`, `XmlSetNodeProperties` and `XmlGetNextNodeListProperties`, it will swap to a working list where fsm variables can be picked for property names

@@ -33,7 +33,7 @@ public class XmlSelectSingleNodeEditor : XmlCustomActionEditor
 		EditField("xmlResult");
 		EditField("storeReference");
 
-		if ( _target.storeProperties.properties.Length==0)
+		if (_target.storeProperties!=null && _target.storeProperties.properties !=null && _target.storeProperties.properties.Length==0)
 		{
 			if (_target.storeNodeProperties!=null)
 			{

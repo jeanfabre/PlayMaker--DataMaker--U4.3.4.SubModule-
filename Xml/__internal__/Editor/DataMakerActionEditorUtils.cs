@@ -33,6 +33,11 @@ public class DataMakerActionEditorUtils {
 		
 		if (target._foldout)
 		{
+			#if PLAYMAKER_1_8_OR_NEWER
+			PlayMakerInspectorUtils.SetActionEditorVariableSelectionContext(target,target.GetType().GetField("xPathQuery"));
+			#endif
+
+
 			target.xPathQuery = VariableEditor.FsmStringField(new GUIContent("xPath Query"),fsm,target.xPathQuery,null);
 		}
 		

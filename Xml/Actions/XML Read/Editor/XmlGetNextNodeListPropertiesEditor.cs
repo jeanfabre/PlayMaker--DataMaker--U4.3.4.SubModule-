@@ -26,7 +26,7 @@ public class XmlGetNextNodeListPropertiesEditor : CustomActionEditor
 		
 		edited = edited || DataMakerActionEditorUtils.EditFsmPropertiesStorage(_target.Fsm,_target.storeProperties);
 
-		if ( _target.storeProperties.properties.Length==0)
+		if (_target.storeProperties!=null && _target.storeProperties.properties !=null && _target.storeProperties.properties.Length==0)
 		{
 			if (_target.storeNodeProperties!=null)
 			{
