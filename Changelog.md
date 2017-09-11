@@ -1,6 +1,13 @@
 #DataMaker Change log
 
-###1.2.4
+###1.2.6
+
+**Released** 11/09/2017
+
+**New**  
+- Action "XmlNodeDelete"
+
+###1.2.5
 
 **Released** 11/05/2017
 
