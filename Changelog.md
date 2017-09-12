@@ -1,5 +1,13 @@
 #DataMaker Change log
 
+###1.2.7
+
+**Released** 11/09/2017
+
+**Fix**  
+- Fixed Action "XmlGetNextNodeListProperties"
+
+
 ###1.2.6
 
 **Released** 11/09/2017

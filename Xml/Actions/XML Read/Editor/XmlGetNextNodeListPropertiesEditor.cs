@@ -23,8 +23,6 @@ public class XmlGetNextNodeListPropertiesEditor : CustomActionEditor
 		EditField("finishedEvent");
 		EditField("index");
 		EditField("reference");
-		
-		edited = edited || DataMakerActionEditorUtils.EditFsmPropertiesStorage(_target.Fsm,_target.storeProperties);
 
 		if (_target.storeProperties!=null && _target.storeProperties.properties !=null && _target.storeProperties.properties.Length==0)
 		{
