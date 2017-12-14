@@ -30,8 +30,9 @@ public class DataMakerEditorGUILayoutUtils {
 	
 	public static Vector2 StringContentPreview(Vector2 scroll, string content)
 	{
+
 		string _preview = "";
-		if(content.Length > 10000)
+		if(content !=null && content.Length > 10000)
 		{
 			_preview = content.Substring(0,9000);
 			_preview = _preview + "/n <etc...>";
