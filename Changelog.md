@@ -1,5 +1,16 @@
 #DataMaker Change log
 
+###1.2.8
+**Released** n/a
+
+**Fix**  
+- Fixed editors preview when content is null
+
+**New**  
+- Action "XmlNodeRemoveAttribute"
+- Action "XmlCloneNode"
+- Action "XmlParentNode"
+
 ###1.2.7
 
 **Released** 11/09/2017
