@@ -43,14 +43,11 @@ namespace HutongGames.PlayMaker.Actions
 		
 		[ActionSection("Properties Storage")]
 		public FsmXmlProperty[] storeNodeProperties; // new version, automatically used on new projects and switched to if storeProperties is found to have no entries. transition is automatic
-
-		
+				
 		
 		// increment an index as we loop through items
 		private int nextItemIndex;
-		
-		// are we there yet?
-		private bool noMoreItems;
+
 		
 		
 		private XmlNodeList _nodeList;
@@ -77,6 +74,7 @@ namespace HutongGames.PlayMaker.Actions
 			
 			if (reset.Value)
 			{
+
 				reset.Value =  false;
 				nextItemIndex = index.Value;
 				_nodeList = null;
@@ -102,7 +100,6 @@ namespace HutongGames.PlayMaker.Actions
 			// no more items?
 			
 			int _count = _nodeList.Count;
-			
 			
 			if (nextItemIndex >= _count)
 			{
