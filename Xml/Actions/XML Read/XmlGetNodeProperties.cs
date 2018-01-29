@@ -38,7 +38,7 @@ namespace HutongGames.PlayMaker.Actions
 		{
 			xmlSource = null;
 
-			storeProperties = new FsmXmlPropertiesStorage();
+			storeProperties = null;
 			storeNodeProperties = null;
 
 			found = null;

@@ -5,6 +5,7 @@
 
 **Fix**  
 - Fixed editors preview when content is null
+- Fixed adction editors for getting node properties between legacy and new way.
 
 **New**  
 - Action "XmlNodeRemoveAttribute"

@@ -25,7 +25,7 @@ public class XmlGetNodePropertiesEditor : CustomActionEditor
 		edited = DataMakerActionEditorUtils.EditFsmXmlSourceField(_target.Fsm,_target.xmlSource);
 
 
-		if (_target.storeProperties!=null && _target.storeProperties.properties !=null && _target.storeProperties.properties.Length==0)
+		if (_target.storeProperties == null || (_target.storeProperties !=null && _target.storeProperties.properties !=null && _target.storeProperties.properties.Length==0))
 		{
 			if (_target.storeNodeProperties!=null)
 			{
