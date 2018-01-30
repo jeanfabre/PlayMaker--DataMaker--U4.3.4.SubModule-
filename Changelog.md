@@ -1,16 +1,17 @@
 #DataMaker Change log
 
 ###1.2.8
-**Released** n/a
+**Released** 29/01/2018
 
 **Fix**  
 - Fixed editors preview when content is null
-- Fixed adction editors for getting node properties between legacy and new way.
+- Fixed action editors for getting node properties between legacy and new way.
 
 **New**  
 - Action "XmlNodeRemoveAttribute"
 - Action "XmlCloneNode"
 - Action "XmlParentNode"
+- DATAMAKER Scripting define symbol
 
 ###1.2.7
 
