@@ -1,5 +1,12 @@
 #DataMaker Change log
 
+###1.2.9
+**Released** n/a
+
+**New**  
+- Editor Browser for Memory references. 
+
+
 ###1.2.8
 **Released** 29/01/2018
 

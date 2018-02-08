@@ -13,8 +13,8 @@ public class DataMakerXmlUtils {
 	
 	#region Memory Slots
 	
-	private static Dictionary<string,XmlNode> xmlNodeLUT;
-	private static Dictionary<string,XmlNodeList> xmlNodeListLUT;
+	public static Dictionary<string,XmlNode> xmlNodeLUT;
+	public static Dictionary<string,XmlNodeList> xmlNodeListLUT;
 
 	public static void XmlStoreNode(XmlNode node,string reference)
 	{
@@ -49,6 +49,36 @@ public class DataMakerXmlUtils {
 			return null;
 		}
 		return xmlNodeLUT[reference];
+	}
+
+	public static bool DeleteXmlNodeReference(string reference)
+	{
+		if (string.IsNullOrEmpty(reference))
+		{
+			Debug.LogWarning("empty reference.");
+		}
+
+		if (!xmlNodeLUT.ContainsKey(reference))
+		{
+			return false;
+		}
+
+		return xmlNodeLUT.Remove (reference);
+	}
+
+	public static bool DeleteXmlNodListeReference(string reference)
+	{
+		if (string.IsNullOrEmpty(reference))
+		{
+			Debug.LogWarning("empty reference.");
+		}
+
+		if (!xmlNodeListLUT.ContainsKey(reference))
+		{
+			return false;
+		}
+		
+		return xmlNodeListLUT.Remove (reference);
 	}
 
 	public static void XmlStoreNodeList(XmlNodeList nodeList,string reference)

@@ -27,7 +27,6 @@ public class XmlGetNextNodeListPropertiesEditor : CustomActionEditor
 
 		if (_target.storeProperties == null || (_target.storeProperties!=null && _target.storeProperties.properties !=null && _target.storeProperties.properties.Length==0))
 		{
-			UnityEngine.Debug.Log("good");
 			if (_target.storeNodeProperties!=null)
 			{
 				_propCount = _target.storeNodeProperties.Length;
@@ -40,7 +39,7 @@ public class XmlGetNextNodeListPropertiesEditor : CustomActionEditor
 				edited = true;
 			}
 		}else{
-			UnityEngine.Debug.Log("wrong");
+
 			edited = edited || DataMakerActionEditorUtils.EditFsmPropertiesStorage(_target.Fsm,_target.storeProperties);
 		}
 

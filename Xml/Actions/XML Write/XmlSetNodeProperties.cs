@@ -50,7 +50,7 @@ namespace HutongGames.PlayMaker.Actions
 			
 			if (_node ==null)
 			{
-				Debug.LogWarning("XMl reference is empty, or likely invalid");
+				Debug.LogWarning("XMl reference <"+xmlReference.Value+"> is empty, or likely invalid in XmlSetNodeProperties "+this.Owner.name+"/"+this.Fsm.Name+"/"+this.State.Name, this.Owner );
 				
 				Fsm.Event (errorEvent);
 				return;
