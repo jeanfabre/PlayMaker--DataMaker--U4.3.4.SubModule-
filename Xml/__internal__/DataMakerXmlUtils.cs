@@ -16,9 +16,14 @@ public class DataMakerXmlUtils {
 	public static Dictionary<string,XmlNode> xmlNodeLUT;
 	public static Dictionary<string,XmlNodeList> xmlNodeListLUT;
 
+	// For inspector, to avoid caching for checking if things have changed
+	public static bool IsDirty;
+
 	public static void XmlStoreNode(XmlNode node,string reference)
 	{
-		
+	
+		IsDirty = true;
+
 		if (string.IsNullOrEmpty(reference))
 		{
 			Debug.LogWarning("empty reference.");
@@ -34,7 +39,6 @@ public class DataMakerXmlUtils {
 	
 	public static XmlNode XmlRetrieveNode(string reference)
 	{
-		
 		if (string.IsNullOrEmpty(reference))
 		{
 			Debug.LogWarning("empty reference.");
@@ -53,6 +57,8 @@ public class DataMakerXmlUtils {
 
 	public static bool DeleteXmlNodeReference(string reference)
 	{
+		IsDirty = true;
+
 		if (string.IsNullOrEmpty(reference))
 		{
 			Debug.LogWarning("empty reference.");
@@ -68,6 +74,8 @@ public class DataMakerXmlUtils {
 
 	public static bool DeleteXmlNodListeReference(string reference)
 	{
+		IsDirty = true;
+
 		if (string.IsNullOrEmpty(reference))
 		{
 			Debug.LogWarning("empty reference.");
@@ -83,7 +91,8 @@ public class DataMakerXmlUtils {
 
 	public static void XmlStoreNodeList(XmlNodeList nodeList,string reference)
 	{
-		
+		IsDirty = true;
+
 		if (string.IsNullOrEmpty(reference))
 		{
 			Debug.LogWarning("empty reference.");

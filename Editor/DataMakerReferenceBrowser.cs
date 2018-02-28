@@ -17,6 +17,10 @@ public class DataMakerReferenceBrowser : EditorWindow {
 
 	Vector2 scroll =  Vector2.zero;
 
+	static GUIStyle _BigTitle;
+
+	public bool LiveUpdate;
+
 	[MenuItem ("PlayMaker/Addons/DataMaker/Reference Browser",false,1)]
 	static void Init () {
 
@@ -32,52 +36,69 @@ public class DataMakerReferenceBrowser : EditorWindow {
 
 		Instance.titleContent = new GUIContent("DataMaker","DataMaker Reference Browser");
 		#endif
+
+	}
+
+	void OnInspectorUpdate() {
+
+		if (DataMakerXmlUtils.IsDirty || LiveUpdate ) {
+			DataMakerXmlUtils.IsDirty = false;
+			Repaint ();
+		}
+
+
+
 	}
 
 	void OnGUI () { wantsMouseMove = true;
 
+
 		if (Event.current.type == EventType.MouseMove) Repaint ();
+
+		GUILayout.BeginHorizontal(EditorStyles.toolbar);
+		GUILayout.FlexibleSpace();
+		LiveUpdate = GUILayout.Toggle(LiveUpdate,"Live Update",EditorStyles.toolbarButton);
+
+		GUILayout.EndHorizontal ();
 
 		scroll = GUILayout.BeginScrollView(scroll);
 
-		GUILayout.Label ("XmlNode References");
-		if (DataMakerXmlUtils.xmlNodeLUT != null) 
-		{
-			GUILayout.BeginVertical();
-			foreach(KeyValuePair<string,XmlNode> entry in DataMakerXmlUtils.xmlNodeLUT)
-			{
-				GUILayout.BeginHorizontal();
+		OnGUI_Title("XmlNode References");
 
-				if (GUILayout.Button(entry.Key))
-				{
-					ToggleXmlNodePreview(entry.Key);
+		if (DataMakerXmlUtils.xmlNodeLUT != null) {
+			GUILayout.BeginVertical ();
+			foreach (KeyValuePair<string,XmlNode> entry in DataMakerXmlUtils.xmlNodeLUT) {
+				GUILayout.BeginHorizontal ();
+
+				if (GUILayout.Button (entry.Key)) {
+					ToggleXmlNodePreview (entry.Key);
 				}
 
-				if (GUILayout.Button("Copy",GUILayout.Width(50)))
-				{
-					PlayMakerEditorUtils.CopyTextToClipboard(DataMakerXmlUtils.XmlNodeToString (entry.Value));
+				if (GUILayout.Button ("Copy", GUILayout.Width (50))) {
+					PlayMakerEditorUtils.CopyTextToClipboard (DataMakerXmlUtils.XmlNodeToString (entry.Value));
 				}
 
-				if (GUILayout.Button("x",GUILayout.Width(30)))
-				{
-					DataMakerXmlUtils.DeleteXmlNodeReference(entry.Key);
+				if (GUILayout.Button ("x", GUILayout.Width (30))) {
+					DataMakerXmlUtils.DeleteXmlNodeReference (entry.Key);
 					GUIUtility.ExitGUI ();
 					return;
 				}
 				
-				GUILayout.EndHorizontal();
+				GUILayout.EndHorizontal ();
 
-				if (xmlNodePreviews.Contains(entry.Key))
-				{
-					OnGUI_XmlNodeReferencePreview(entry.Key);
+				if (xmlNodePreviews.Contains (entry.Key)) {
+					OnGUI_XmlNodeReferencePreview (entry.Key);
 				}
 
 			}
-			GUILayout.EndVertical();
+			GUILayout.EndVertical ();
 
+		} else {
+			GUILayout.Label ("- nothing yet -");
 		}
 
-		GUILayout.Label ("XmlNodeList References");
+		OnGUI_Title("XmlNodeList References");
+
 		if (DataMakerXmlUtils.xmlNodeListLUT != null) 
 		{
 			GUILayout.BeginVertical();
@@ -112,6 +133,8 @@ public class DataMakerReferenceBrowser : EditorWindow {
 			}
 			GUILayout.EndVertical();
 			
+		} else {
+			GUILayout.Label ("- nothing yet -");
 		}
 
 
@@ -169,5 +192,18 @@ public class DataMakerReferenceBrowser : EditorWindow {
 			xmlNodeListPreviewsScroll [reference] = DataMakerEditorGUILayoutUtils.StringContentPreview (xmlNodeListPreviewsScroll [reference], preview);
 		}
 	}
+
+	void OnGUI_Title(string title)
+	{
+		if (_BigTitle == null) {
+			_BigTitle = GUI.skin.FindStyle ("IN BigTitle");
+		}
+
+		GUILayout.BeginHorizontal (_BigTitle,GUILayout.ExpandWidth(true));
+		GUILayout.Label (title,EditorStyles.boldLabel,GUILayout.ExpandWidth(true));
+		GUILayout.EndHorizontal ();
+
+	}
+
 
 }
