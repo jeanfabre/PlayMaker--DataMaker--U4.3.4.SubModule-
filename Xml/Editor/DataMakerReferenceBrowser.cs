@@ -21,7 +21,7 @@ public class DataMakerReferenceBrowser : EditorWindow {
 
 	public bool LiveUpdate;
 
-	[MenuItem ("PlayMaker/Addons/DataMaker/Reference Browser",false,1)]
+	[MenuItem ("PlayMaker/Addons/DataMaker/Xml/Reference Browser",false,1)]
 	static void Init () {
 
 		
@@ -45,8 +45,6 @@ public class DataMakerReferenceBrowser : EditorWindow {
 			DataMakerXmlUtils.IsDirty = false;
 			Repaint ();
 		}
-
-
 
 	}
 

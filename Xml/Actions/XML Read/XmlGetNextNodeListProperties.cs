@@ -74,9 +74,13 @@ namespace HutongGames.PlayMaker.Actions
 			
 			if (reset.Value)
 			{
-
 				reset.Value =  false;
-				nextItemIndex = index.Value;
+				if (index.IsNone)
+				{
+					nextItemIndex = 0;
+				}else{
+					nextItemIndex = index.Value;
+				}
 				_nodeList = null;
 			}
 			

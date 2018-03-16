@@ -65,6 +65,7 @@ namespace HutongGames.PlayMaker.Actions
 
 			if (parentNode==null)
 			{
+				Fsm.EventData.StringData = "parentNode is null";
 				Fsm.Event(errorEvent);
 				return;
 			}
