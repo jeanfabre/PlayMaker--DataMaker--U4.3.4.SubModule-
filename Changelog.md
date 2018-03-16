@@ -6,6 +6,8 @@
 **New**  
 - Editor Browser for Memory references. 
 
+**New**  
+- Action "XmlReplaceNode"
 
 ###1.2.8
 **Released** 29/01/2018
