@@ -1,13 +1,20 @@
 #DataMaker Change log
 
 ###1.2.9
-**Released** n/a
+**Released** 27/06/2018
 
 **New**  
 - Editor Browser for Memory references. 
 
 **New**  
 - Action "XmlReplaceNode"
+
+**Fix**  
+- Fixed `XmlGetNextNodeListPropertiesEdit` editfields definitions. 
+
+**Update**  
+- Update PlayMakerUtils  
+- updated ArrayMaker  
 
 ###1.2.8
 **Released** 29/01/2018
