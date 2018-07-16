@@ -29,7 +29,7 @@ public class DataMakerReferenceBrowser : EditorWindow {
 		Instance = (DataMakerReferenceBrowser)EditorWindow.GetWindow (typeof (DataMakerReferenceBrowser));
 		
 		Instance.position = new Rect(100,100, 430,600);
-		Instance.minSize = new Vector2(200,500);
+		Instance.minSize = new Vector2(200,200);
 		#if UNITY_4_3 || UNITY_4_4 || UNITY_4_5 || UNITY_4_5 || UNITY_4_6 || UNITY_4_7 || UNITY_5_0
 		Instance.title = "DataMaker";
 		#else
