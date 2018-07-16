@@ -27,10 +27,14 @@ public class DataMakerXmlProxyEditor : Editor {
 		
 		_target.FsmEventTarget = EditorGUILayout.ObjectField(new GUIContent("Fsm Event Target"),_target.FsmEventTarget,typeof(PlayMakerFSM),true) as PlayMakerFSM;
 
+
+		_target.storeInMemory = EditorGUILayout.TextField(new GUIContent("Store In Memory"),_target.storeInMemory);
+
 		if (_target.isDirty)
 		{
 			Refresh();
 		}
+
 
 		if (!Application.isPlaying)
 		{
