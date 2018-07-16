@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Collections;
 
 
-public class DataMakerProxyBase : MonoBehaviour {
+public abstract class DataMakerProxyBase : MonoBehaviour {
 
 	/// <summary>
 	/// the reference Name used when finding or when several component coexists on the same GameObject
