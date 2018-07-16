@@ -4,12 +4,42 @@ using System.Collections.Generic;
 using System;
 using System.IO;
 using System.Xml;
+using System.Xml.XPath;
 
 public class DataMakerXmlUtils {
 	
 	
 	
 		
+	/// <summary>
+	/// Returns an instance of XmlNamespaceManager with a specified XmlDocument.NameTable.  
+	/// Returns null if no namespace is defined.
+	/// https://blogs.msdn.microsoft.com/helloworld/2007/12/28/dynamically-getting-namespaces-in-an-xml/
+	/// </summary>
+	/// <param name="Doc">The XmlDocument</param>
+	/// <returns>XmlNamespaceManager if there is at least one namespace, null if there is no namespace defined.</returns>
+	public static XmlNamespaceManager CreateNamespaceManager(XmlDocument Doc)
+	{
+		//Create an instance of XPathNavigator at the root of the XmlDocument.
+		XPathNavigator Nav = Doc.SelectSingleNode("/*").CreateNavigator();
+		XmlNamespaceManager Result = null;
+		
+		//Move to the first namespace.
+		if (Nav.MoveToFirstNamespace())
+		{
+			Result = new XmlNamespaceManager(Doc.NameTable);
+			
+			do
+			{
+				//Add namespaces to XmlNamespaceManager, if the Nav.Name is an empty string, it is the default
+				//namespace.  Assign 'default' as the prefix.
+				Result.AddNamespace(String.IsNullOrEmpty(Nav.Name)? "default" : Nav.Name, Nav.Value);
+			} while (Nav.MoveToNextNamespace());
+		}
+		
+		return Result;
+	}
+
 	
 	#region Memory Slots
 	

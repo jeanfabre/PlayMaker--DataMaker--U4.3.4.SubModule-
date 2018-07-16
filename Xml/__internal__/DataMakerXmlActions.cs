@@ -30,7 +30,7 @@ namespace HutongGames.PlayMaker.Actions
 					property =  "."+property;
 				}
 				
-				XmlNode subNode = node.SelectSingleNode(property);
+				XmlNode subNode = node.SelectSingleNode(property,DataMakerXmlUtils.CreateNamespaceManager(node.OwnerDocument));
 				if (subNode != null) {
 					return subNode.InnerText;
 				} else {
@@ -71,7 +71,7 @@ namespace HutongGames.PlayMaker.Actions
 					property =  "."+property;
 				}
 				
-				XmlNode subNode = node.SelectSingleNode(property);
+				XmlNode subNode = node.SelectSingleNode(property,DataMakerXmlUtils.CreateNamespaceManager(node.OwnerDocument));
 				if (subNode != null) {
 					subNode.InnerText = propertyValue;
 				} else {

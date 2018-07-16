@@ -88,7 +88,7 @@ namespace HutongGames.PlayMaker.Actions
 			XmlNode node = null;
 			
 			try{
-				node = xmlSource.Value.SelectSingleNode(xPathQueryString);
+				node = xmlSource.Value.SelectSingleNode(xPathQueryString,DataMakerXmlUtils.CreateNamespaceManager(xmlSource.Value.OwnerDocument));
 			}catch(XPathException e)
 			{
 				Debug.LogWarning(e.Message);
