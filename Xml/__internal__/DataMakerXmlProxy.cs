@@ -79,6 +79,11 @@ public class DataMakerXmlProxy : DataMakerProxyBase {
 		{
 			xmlNode.AppendChild(_node);
 		}
+
+		if (!string.IsNullOrEmpty (storeInMemory)) {
+			DataMakerXmlUtils.XmlStoreNode(xmlNode,storeInMemory);
+		}
+
 		RegisterEventHandlers();
 	}
 	
@@ -86,6 +91,10 @@ public class DataMakerXmlProxy : DataMakerProxyBase {
 	{
 		//Debug.Log("InjectXmlString :"+source);
 		xmlNode = DataMakerXmlUtils.StringToXmlNode(source);
+
+		if (!string.IsNullOrEmpty (storeInMemory)) {
+			DataMakerXmlUtils.XmlStoreNode(xmlNode,storeInMemory);
+		}
 
 		RegisterEventHandlers();
 	}
