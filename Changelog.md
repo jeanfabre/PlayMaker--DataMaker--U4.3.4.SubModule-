@@ -1,7 +1,15 @@
 #DataMaker Change log
 
+###1.3.1
+**Released** 18/08/2018
+
+**Fix** 
+
+- Updated PlayMaker utils
+
+
 ###1.3
-**Released** 16/03/2018
+**Released** 16/08/2018
 
 **New**
 
