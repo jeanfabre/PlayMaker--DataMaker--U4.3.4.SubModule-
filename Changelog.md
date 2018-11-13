@@ -1,5 +1,13 @@
 #DataMaker Change log
 
+###1.4.0
+**Released** 13/11/2018. 
+
+**New**
+- new json newton dll
+
+- new action `ConvertXmlNodeToJson`
+
 ###1.3.1
 **Released** 18/08/2018
 
