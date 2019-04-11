@@ -1,5 +1,19 @@
 #DataMaker Change log
 
+###1.4.2
+**Released** 11/04/2019. 
+
+**New**
+
+- action `ConvertCsvStringToXmlNode` now accepts a custom delimiter.
+
+###1.4.1
+**Released** 04/04/2019. 
+
+**New**
+
+- action `ReadCsv` now accepts a custom delimiter.
+
 ###1.4.0
 **Released** 13/11/2018. 
 

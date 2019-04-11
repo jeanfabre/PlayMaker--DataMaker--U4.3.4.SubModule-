@@ -199,7 +199,7 @@ namespace HutongGames.PlayMaker.Ecosystem.DataMaker.CSV
 	
 	public class CsvReader
 	{
-		public static CsvData LoadFromString(string file_contents, bool hasHeader = false)
+		public static CsvData LoadFromString(string file_contents, bool hasHeader = false,char delimiter = ',')
 		{
 			CsvData _result = new CsvData(hasHeader);
 
@@ -209,70 +209,60 @@ namespace HutongGames.PlayMaker.Ecosystem.DataMaker.CSV
 			int cur_file_index = 0; // index in the file
 			List<string> cur_line = new List<string>(); // current line of data
 
+		
 			StringBuilder cur_item = new StringBuilder("");
 			bool inside_quotes = false; // managing quotes
 			while (cur_file_index < file_length)
 			{
 				char c = file_contents[cur_file_index++];
-				
-				switch (c)
-				{
-				case '"':
-					if (!inside_quotes)
-					{
+
+				if (c == '"') {
+					if (!inside_quotes) {
 						inside_quotes = true;
-					}
-					else
-					{
-						if (cur_file_index == file_length)
-						{
+					} else {
+						if (cur_file_index == file_length) {
 							// end of file
 							inside_quotes = false;
-							goto case '\n';
-						}
-						else if (file_contents[cur_file_index] == '"')
-						{
+							//goto case '\n';
+							cur_line.Add (cur_item.ToString ());
+							cur_item.Length = 0;
+							if (c == '\n' || cur_file_index == file_length) {
+								_result.AddRecord (cur_line);
+								cur_line.Clear ();
+							}
+
+						} else if (file_contents [cur_file_index] == '"') {
 							// double quote, save one
-							cur_item.Append("\"");
+							cur_item.Append ("\"");
 							cur_file_index++;
-						}
-						else
-						{
+						} else {
 							// leaving quotes section
 							inside_quotes = false;
 						}
 					}
-					break;
-				case '\r':
+				} else if (c == '\r') {
 					// ignore it completely
-					Debug.Log("OUPPS found a \\r");
-					break;
+					Debug.Log ("OUPPS found a \\r");
+				} else if (c == '\n' || c == delimiter) {
 
-				case ',':
-					goto case '\n';
-				case '\n':
-					if (inside_quotes)
-					{
+					if (inside_quotes) {
 						// inside quotes, this characters must be included
-						cur_item.Append(c);
-					}
-					else
-					{
+						cur_item.Append (c);
+					} else {
 						// end of current item
-						cur_line.Add(cur_item.ToString());
+						cur_line.Add (cur_item.ToString ());
 						cur_item.Length = 0;
-						if (c == '\n' || cur_file_index == file_length)
-						{
-							_result.AddRecord(cur_line);
-							cur_line.Clear();
+						if (c == '\n' || cur_file_index == file_length) {
+							_result.AddRecord (cur_line);
+							cur_line.Clear ();
 						}
 					}
-					break;
-				default:
+				} else {
+
 					// other cases, add char
-					cur_item.Append(c);
-					break;
+					cur_item.Append (c);
 				}
+
 			}
 
 			// fix for last item of last line not using quotes

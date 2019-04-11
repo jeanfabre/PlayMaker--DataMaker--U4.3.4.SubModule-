@@ -24,6 +24,9 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("If the csv first line is a headerm check this, it will allow you to use keys to access columns instead of indexes")]
 		public FsmBool hasHeader;
 
+		[Tooltip ("Custom delimiter, leave to none for no effect")]
+		public FsmString delimiter;
+
 		[ActionSection("Result")]
 		
 		[Tooltip("Save as xml reference")]
@@ -49,6 +52,8 @@ namespace HutongGames.PlayMaker.Actions
 			csvSource = null;
 			hasHeader = null;
 
+			delimiter = new FsmString () { UseVariable = true };
+
 			storeReference = new FsmString(){UseVariable=true};
 			gameObject = null;
 			reference = new FsmString(){UseVariable=true};
@@ -66,8 +71,13 @@ namespace HutongGames.PlayMaker.Actions
 		
 		void ConvertFromCsvString()
 		{
+			CsvData _data;
 
-			CsvData _data = CsvReader.LoadFromString(csvSource.Value,hasHeader.Value);
+			if (!delimiter.IsNone) {
+				_data = CsvReader.LoadFromString (csvSource.Value, hasHeader.Value, delimiter.Value [0]);
+			} else {
+				_data = CsvReader.LoadFromString (csvSource.Value, hasHeader.Value);
+			}
 		
 			XmlDocument _document = new XmlDocument();
 			XmlNode _root =	_document.AppendChild(_document.CreateElement("Root"));
@@ -122,24 +132,26 @@ namespace HutongGames.PlayMaker.Actions
 			}
 			
 			GameObject go = Fsm.GetOwnerDefaultTarget(gameObject);
-			
-			DataMakerXmlProxy proxy = DataMakerCore.GetDataMakerProxyPointer(typeof(DataMakerXmlProxy), go, reference.Value, false) as DataMakerXmlProxy;
-			
-			if (proxy!=null) {
 
-				if (_document.DocumentElement.GetType() ==  typeof(XmlNodeList) )
-				{
-				//	proxy.InjectXmlNodeList(_document.DocumentElement as XmlNode);
-				}else{
-					proxy.InjectXmlNode(_document.DocumentElement as XmlNode);
+			if (go != null) {
+				DataMakerXmlProxy proxy = DataMakerCore.GetDataMakerProxyPointer (typeof (DataMakerXmlProxy), go, reference.Value, false) as DataMakerXmlProxy;
+
+				if (proxy != null) {
+
+					if (_document.DocumentElement.GetType () == typeof (XmlNodeList)) {
+						//	proxy.InjectXmlNodeList(_document.DocumentElement as XmlNode);
+					} else {
+						proxy.InjectXmlNode (_document.DocumentElement as XmlNode);
+					}
 				}
-			}
 
-			proxy.RefreshStringVersion();
+				proxy.RefreshStringVersion ();
+			}
 
 			if (!xmlString.IsNone) 
 			{
-				xmlString.Value=proxy.content; 
+
+				xmlString.Value = DataMakerXmlUtils.XmlNodeToString (_document.DocumentElement as XmlNode);
 			}
 
 			Finish ();

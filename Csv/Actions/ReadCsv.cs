@@ -21,6 +21,10 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("If the csv first line is a headerm check this, it will allow you to use keys to access columns instead of indexes")]
 		public FsmBool hasHeader;
 
+		[Tooltip ("Custom delimiter, leave to none for no effect")]
+		public FsmString delimiter;
+
+
 		[Tooltip("Save as csv reference")]
 		[RequiredField]
 		public FsmString storeReference;
@@ -41,7 +45,9 @@ namespace HutongGames.PlayMaker.Actions
 		{
 			csvSource = null;
 			hasHeader =  null;
-	
+
+			delimiter = new FsmString () { UseVariable = true };
+
 			recordCount = null;
 			columnCount = null;
 
@@ -59,8 +65,12 @@ namespace HutongGames.PlayMaker.Actions
 		
 		void ParseCsv()
 		{
-
-		 	CsvData _data = CsvReader.LoadFromString(csvSource.Value,hasHeader.Value);
+			CsvData _data;
+			if (!delimiter.IsNone) {
+				_data = CsvReader.LoadFromString (csvSource.Value, hasHeader.Value,delimiter.Value[0]);
+			} else {
+				_data  = CsvReader.LoadFromString (csvSource.Value, hasHeader.Value);
+			}
 
 			CsvData.AddReference(_data,storeReference.Value);
 
