@@ -25,26 +25,42 @@ namespace HutongGames.PlayMaker.Actions
 				}
 			}else if (property.StartsWith("/") || property.StartsWith("."))
 			{
-				if (property.StartsWith("/"))
-				{
-					property =  "."+property;
-				}
-				
-				XmlNode subNode = node.SelectSingleNode(property,DataMakerXmlUtils.CreateNamespaceManager(node.OwnerDocument));
-				if (subNode != null) {
-					return subNode.InnerText;
-				} else {
-					Debug.LogWarning (property + " not found");
-				}
-			
+					if (property.StartsWith("/"))
+					{
+						property = "." + property;
+					}
+					
+					XmlNode subNode = node.SelectSingleNode(property,
+						DataMakerXmlUtils.CreateNamespaceManager(node.OwnerDocument));
+					if (subNode != null)
+					{
+						return subNode.InnerText;
+					}
+					else
+					{
+						Debug.LogWarning(property + " not found");
+					}
+	
 			}else
 			{
-				XmlNode innerNode = node[property];
-				if (innerNode != null) {
-					return innerNode.InnerText;
-				} else {
-					return node.InnerText;
-					//Debug.LogWarning (property + " not found");
+				if (property == "Name()")
+				{
+					return node.Name;
+
+				}
+				else
+				{
+
+					XmlNode innerNode = node[property];
+					if (innerNode != null)
+					{
+						return innerNode.InnerText;
+					}
+					else
+					{
+						return node.InnerText;
+						//Debug.LogWarning (property + " not found");
+					}
 				}
 			}
 			

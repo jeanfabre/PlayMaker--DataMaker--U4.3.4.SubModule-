@@ -1,5 +1,22 @@
 #DataMaker Change log
 
+###1.4.4
+**Released** 22/05/2019. 
+
+**New**  
+
+- added `Name()` xpath property access, which gives you the name of the xmlnode itself.
+
+
+###1.4.3
+**Released** 16/05/2019. 
+
+**Update**  
+
+- Updated PlayMakerUtils  
+- Updated Json dll
+
+
 ###1.4.2
 **Released** 11/04/2019. 
 
