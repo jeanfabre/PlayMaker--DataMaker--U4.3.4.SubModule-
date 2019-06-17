@@ -66,5 +66,14 @@ namespace HutongGames.PlayMaker.Actions
 			Finish ();
 		}
 
+		public override string ErrorCheck()
+		{
+			if (!storeReference.IsNone && !xmlSource.IsNone)
+			{
+				return "You must pick either storeReference or xmlSource. one them needs to be set to 'None'";
+			}
+				
+			return "";
+		}
 	}
 }

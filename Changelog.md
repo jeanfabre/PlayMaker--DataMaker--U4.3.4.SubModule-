@@ -1,5 +1,13 @@
 #DataMaker Change log
 
+###1.4.5
+**Released** 17/06/2019. 
+
+**Update**  
+
+- XmlSaveInProxy now cheks for input and prevent mix up
+
+
 ###1.4.4
 **Released** 22/05/2019. 
 
