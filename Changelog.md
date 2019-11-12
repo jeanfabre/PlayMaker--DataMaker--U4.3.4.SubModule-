@@ -1,5 +1,13 @@
 #DataMaker Change log
 
+###1.4.6
+**Released** 12/11/2019. 
+
+**Update**  
+
+- Updated PlayMakerUtils  
+- Updated Json dll
+
 ###1.4.5
 **Released** 17/06/2019. 
 
