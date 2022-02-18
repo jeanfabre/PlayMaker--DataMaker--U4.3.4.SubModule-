@@ -11,7 +11,7 @@ namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory("DataMaker Csv")]
 	[Tooltip("Get a Csv Column by key and save it in an array of string. Use ReadCsv first.")]
-	public class GetCsvColumnByKey : FsmStateAction
+	public class GetCsvFieldsByColumnKey : FsmStateAction
 	{
 		
 		[Tooltip("The csv reference defined in ReadCsv action")]

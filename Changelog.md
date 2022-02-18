@@ -1,5 +1,12 @@
 #DataMaker Change log
 
+###1.4.7
+**Released** 18/02/2022.
+
+**Fix**
+
+- Fixed class naming for GetCsvFieldsByColumnKey to match file name
+
 ###1.4.6
 **Released** 12/11/2019. 
 
